@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - MinimalBlog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              serif: ['Merriweather', 'Georgia', 'serif'],
+            },
+            colors: {
+              primary: {
+                50: '#EFF6FF',
+                100: '#DBEAFE',
+                200: '#BFDBFE',
+                300: '#93C5FD',
+                400: '#60A5FA',
+                500: '#3B82F6',
+                600: '#2563EB',
+                700: '#1D4ED8',
+                800: '#1E40AF',
+                900: '#1E3A8A',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-6">
+          <a href="/" class="text-2xl font-serif font-bold text-primary-600 dark:text-primary-400">
+            MinimalBlog
+          </a>
+          <nav class="flex space-x-8">
+            <a href="/" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Home</a>
+            <a href="/blog.html" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Blog</a>
+            <a href="/profile.html" class="text-primary-600 dark:text-primary-400">Profile</a>
+            <a href="/login.html" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Logout</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div class="px-4 py-6 sm:px-0">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Profile Sidebar -->
+          <div class="lg:col-span-1">
+            <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+              <div class="text-center">
+                <img class="mx-auto h-32 w-32 rounded-full" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Profile">
+                <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">John Doe</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">john.doe@example.com</p>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Member since January 2024</p>
+              </div>
+              
+              <div class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
+                <nav class="space-y-1">
+                  <a href="#profile" onclick="showTab('profile')" class="tab-link bg-primary-50 dark:bg-primary-900 text-primary-700 dark:text-primary-300 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
+                    <svg class="text-primary-500 dark:text-primary-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Profile Settings
+                  </a>
+                  
+                  <a href="#password" onclick="showTab('password')" class="tab-link text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
+                    <svg class="text-gray-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    Change Password
+                  </a>
+                  
+                  <a href="#comments" onclick="showTab('comments')" class="tab-link text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
+                    <svg class="text-gray-400 mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    My Comments
+                  </a>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Content -->
+          <div class="lg:col-span-2">
+            <!-- Profile Settings Tab -->
+            <div id="profile-tab" class="tab-content bg-white dark:bg-gray-800 shadow rounded-lg">
+              <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Profile Settings</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Update your personal information and profile details.</p>
+              </div>
+              
+              <form class="p-6 space-y-6">
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  <div>
+                    <label for="first-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">First name</label>
+                    <input type="text" id="first-name" value="John" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                  </div>
+                  
+                  <div>
+                    <label for="last-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Last name</label>
+                    <input type="text" id="last-name" value="Doe" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                  </div>
+                </div>
+                
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email address</label>
+                  <input type="email" id="email" value="john.doe@example.com" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                </div>
+                
+                <div>
+                  <label for="bio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
+                  <textarea id="bio" rows="4" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder="Tell us about yourself...">Web developer passionate about creating amazing user experiences.</textarea>
+                </div>
+                
+                <div>
+                  <label for="website" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Website</label>
+                  <input type="url" id="website" value="https://johndoe.dev" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                </div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Profile photo</label>
+                  <div class="mt-1 flex items-center space-x-5">
+                    <img class="h-12 w-12 rounded-full" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Current profile">
+                    <button type="button" class="bg-white dark:bg-gray-700 py-2 px-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                      Change
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="flex justify-end">
+                  <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                    Save changes
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Change Password Tab -->
+            <div id="password-tab" class="tab-content bg-white dark:bg-gray-800 shadow rounded-lg hidden">
+              <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Change Password</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Update your password to keep your account secure.</p>
+              </div>
+              
+              <form class="p-6 space-y-6">
+                <div>
+                  <label for="current-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Current password</label>
+                  <input type="password" id="current-password" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                </div>
+                
+                <div>
+                  <label for="new-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">New password</label>
+                  <input type="password" id="new-password" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                  <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Must be at least 8 characters with uppercase, lowercase, and numbers</p>
+                </div>
+                
+                <div>
+                  <label for="confirm-new-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm new password</label>
+                  <input type="password" id="confirm-new-password" class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white sm:text-sm">
+                </div>
+                
+                <div class="flex justify-end">
+                  <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                    Update password
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- My Comments Tab -->
+            <div id="comments-tab" class="tab-content bg-white dark:bg-gray-800 shadow rounded-lg hidden">
+              <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">My Comments</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">View and manage all your comments across the blog.</p>
+              </div>
+              
+              <div class="p-6">
+                <!-- Comment 1 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
+                  <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                      <h4 class="text-sm font-medium text-gray-900 dark:text-white">
+                        <a href="/post.html" class="hover:text-primary-600 dark:hover:text-primary-400">The Future of Web Development: Trends to Watch in 2025</a>
+                      </h4>
+                      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                        Great article! I've been experimenting with WebAssembly recently and the performance gains are impressive. Looking forward to seeing how this technology evolves in the coming years.
+                      </p>
+                      <div class="mt-2 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                        <span>Posted on January 15, 2024</span>
+                        <span class="mx-2">•</span>
+                        <span class="text-green-600 dark:text-green-400">Published</span>
+                      </div>
+                    </div>
+                    <div class="ml-4 flex space-x-2">
+                      <button class="text-primary-600 hover:text-primary-500 dark:text-primary-400 text-sm">Edit</button>
+                      <button class="text-red-600 hover:text-red-500 dark:text-red-400 text-sm">Delete</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Comment 2 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
+                  <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                      <h4 class="text-sm font-medium text-gray-900 dark:text-white">
+                        <a href="/post.html" class="hover:text-primary-600 dark:hover:text-primary-400">Getting Started with Tailwind CSS: A Beginner's Guide</a>
+                      </h4>
+                      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                        This tutorial was exactly what I needed! The step-by-step approach made it easy to understand. Thanks for sharing.
+                      </p>
+                      <div class="mt-2 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                        <span>Posted on January 12, 2024</span>
+                        <span class="mx-2">•</span>
+                        <span class="text-green-600 dark:text-green-400">Published</span>
+                      </div>
+                    </div>
+                    <div class="ml-4 flex space-x-2">
+                      <button class="text-primary-600 hover:text-primary-500 dark:text-primary-400 text-sm">Edit</button>
+                      <button class="text-red-600 hover:text-red-500 dark:text-red-400 text-sm">Delete</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Comment 3 -->
+                <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
+                  <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                      <h4 class="text-sm font-medium text-gray-900 dark:text-white">
+                        <a href="/post.html" class="hover:text-primary-600 dark:hover:text-primary-400">Designing for Accessibility: Best Practices</a>
+                      </h4>
+                      <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                        Accessibility is so important and often overlooked. These tips will definitely help me improve my projects.
+                      </p>
+                      <div class="mt-2 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                        <span>Posted on January 8, 2024</span>
+                        <span class="mx-2">•</span>
+                        <span class="text-yellow-600 dark:text-yellow-400">Pending Review</span>
+                      </div>
+                    </div>
+                    <div class="ml-4 flex space-x-2">
+                      <button class="text-primary-600 hover:text-primary-500 dark:text-primary-400 text-sm">Edit</button>
+                      <button class="text-red-600 hover:text-red-500 dark:text-red-400 text-sm">Delete</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-8">
+                  <nav class="inline-flex rounded-md shadow-sm -space-x-px">
+                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      Previous
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      1
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-primary-50 dark:bg-primary-900 text-sm font-medium text-primary-600 dark:text-primary-300">
+                      2
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      3
+                    </a>
+                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-600">
+                      Next
+                    </a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Dark mode toggle
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+
+      // Tab switching functionality
+      function showTab(tabName) {
+        // Hide all tab contents
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(tab => tab.classList.add('hidden'));
+        
+        // Remove active class from all tab links
+        const tabLinks = document.querySelectorAll('.tab-link');
+        tabLinks.forEach(link => {
+          link.classList.remove('bg-primary-50', 'dark:bg-primary-900', 'text-primary-700', 'dark:text-primary-300');
+          link.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-gray-700');
+        });
+        
+        // Show selected tab content
+        document.getElementById(tabName + '-tab').classList.remove('hidden');
+        
+        // Add active class to clicked tab link
+        event.target.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-gray-700');
+        event.target.classList.add('bg-primary-50', 'dark:bg-primary-900', 'text-primary-700', 'dark:text-primary-300');
+      }
+    </script>
+  </body>
+</html>
