@@ -1,57 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile - MinimalBlog</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
-              serif: ['Merriweather', 'Georgia', 'serif'],
-            },
-            colors: {
-              primary: {
-                50: '#EFF6FF',
-                100: '#DBEAFE',
-                200: '#BFDBFE',
-                300: '#93C5FD',
-                400: '#60A5FA',
-                500: '#3B82F6',
-                600: '#2563EB',
-                700: '#1D4ED8',
-                800: '#1E40AF',
-                900: '#1E3A8A',
-              }
-            }
-          }
-        }
-      }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
-    <!-- Header -->
-    <header class="bg-white dark:bg-gray-800 shadow">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center py-6">
-          <a href="/" class="text-2xl font-serif font-bold text-primary-600 dark:text-primary-400">
-            MinimalBlog
-          </a>
-          <nav class="flex space-x-8">
-            <a href="/" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Home</a>
-            <a href="/blog.html" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Blog</a>
-            <a href="/profile.html" class="text-primary-600 dark:text-primary-400">Profile</a>
-            <a href="/login.html" class="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Logout</a>
-          </nav>
-        </div>
-      </div>
-    </header>
+{% extends 'base/base.html' %}
+{% block content %}
 
     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
       <div class="px-4 py-6 sm:px-0">
@@ -60,10 +8,10 @@
           <div class="lg:col-span-1">
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
               <div class="text-center">
-                <img class="mx-auto h-32 w-32 rounded-full" src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Profile">
-                <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">John Doe</h3>
-                <p class="text-sm text-gray-500 dark:text-gray-400">john.doe@example.com</p>
-                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Member since January 2024</p>
+                <img class="mx-auto h-32 w-32 rounded-full" src="{{ user.profile.image.url}}" alt="Profile">
+                <h3 class="mt-4 text-lg font-medium text-gray-900 dark:text-white">{{user.name}}</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</p>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Member since {{user.date_joined}}</p>
               </div>
               
               <div class="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
@@ -284,34 +232,4 @@
       </div>
     </div>
 
-    <script>
-      // Dark mode toggle
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-
-      // Tab switching functionality
-      function showTab(tabName) {
-        // Hide all tab contents
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabContents.forEach(tab => tab.classList.add('hidden'));
-        
-        // Remove active class from all tab links
-        const tabLinks = document.querySelectorAll('.tab-link');
-        tabLinks.forEach(link => {
-          link.classList.remove('bg-primary-50', 'dark:bg-primary-900', 'text-primary-700', 'dark:text-primary-300');
-          link.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-gray-700');
-        });
-        
-        // Show selected tab content
-        document.getElementById(tabName + '-tab').classList.remove('hidden');
-        
-        // Add active class to clicked tab link
-        event.target.classList.remove('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-50', 'dark:hover:bg-gray-700');
-        event.target.classList.add('bg-primary-50', 'dark:bg-primary-900', 'text-primary-700', 'dark:text-primary-300');
-      }
-    </script>
-  </body>
-</html>
+{% endblock %}

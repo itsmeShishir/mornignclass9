@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'src/img/img-1.jpg' %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MinimalBlog - Simple and Elegant</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -11,10 +11,37 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="{% static 'src/js/main.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              serif: ['Merriweather', 'Georgia', 'serif'],
+            },
+            colors: {
+              primary: {
+                50: '#EFF6FF',
+                100: '#DBEAFE',
+                200: '#BFDBFE',
+                300: '#93C5FD',
+                400: '#60A5FA',
+                500: '#3B82F6',
+                600: '#2563EB',
+                700: '#1D4ED8',
+                800: '#1E40AF',
+                900: '#1E3A8A',
+              }
+            }
+          }
+        }
+      }
+    </script>
   </head>
-  <body>
-    <!-- Header -->
-    <header class="sticky top-0 bg-white dark:bg-gray-900 shadow-sm z-10">
+  <body class="w-[95vw] md:w-[90vw] lg:w-[65vw] mx-auto">
+    <header class="sticky top-0 bg-white dark:bg-gray-900 z-10">
       <nav class="container-custom py-4">
         <div class="flex justify-between items-center">
           <a href="/" class="text-2xl font-serif font-bold text-primary-600 dark:text-primary-400">
@@ -26,7 +53,14 @@
             <a href="blog" class="font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400">Blog</a>
             <a href="about" class="font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400">About</a>
             <a href="contact" class="font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400">Contact</a>
+            {% if user.is_authenticated %}
+              <a href="{% url 'profiles' %}" class="font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400">{{user.email}}</a>
+              <a href="{% url 'logout' %}" class="font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400">logout</a>
+            {% else %}
+              <a href="{% url 'login' %}" class="font-medium text-gray-800 dark:text-gray-200 hover:text-primary-500 dark:hover:text-primary-400">Login</a>
+            {% endif %}
             <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
