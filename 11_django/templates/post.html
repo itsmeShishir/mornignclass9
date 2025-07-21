@@ -3,15 +3,15 @@
 
     <!-- Article Header -->
     <section class="bg-gradient-to-br from-primary-50 to-white dark:from-gray-800 dark:to-gray-900 py-12 md:py-24">
-      <div class="container-custom max-w-4xl text-center">
+      <div class="container max-w-4xl mx-auto text-center">
         <div class="flex items-center justify-center mb-6 space-x-4">
-          <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">Technology</span>
-          <span class="text-sm text-gray-500 dark:text-gray-400">October 15, 2025</span>
+          <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">{{getSingle.category.title}}</span>
+          <span class="text-sm text-gray-500 dark:text-gray-400">{{getSingle.created_at}}</span>
         </div>
-        <h1 class="mb-6 animate-fade-in">The Future of Web Development: Trends to Watch in 2025</h1>
+        <h1 class="mb-6 animate-fade-in">{{getSingle.title}}</h1>
         <div class="flex items-center justify-center">
           <img 
-            src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+            src="{{getSingle.img.url}}" 
             alt="Featured image" 
             class="w-full h-64 md:h-96 object-cover rounded-xl shadow-lg animate-slide-up"
           />
@@ -21,97 +21,11 @@
 
     <!-- Article Content -->
     <section class="py-16 bg-white dark:bg-gray-900">
-      <div class="container-custom max-w-3xl">
+      <div class="container max-w-4xl mx-auto max-w-3xl">
         <div class="prose prose-lg dark:prose-invert mx-auto">
           <p class="lead text-xl text-gray-600 dark:text-gray-300">
-            As we move further into 2025, web development continues to evolve at a rapid pace. From AI-powered tools to new approaches in design, let's explore what's shaping the future of the web.
+           {{getSingle.content}}
           </p>
-          
-          <h2>1. AI-Assisted Development</h2>
-          <p>
-            The most significant shift we're seeing is the widespread adoption of AI tools to accelerate development workflows. These tools can now generate entire components, debug code, and even optimize performance with minimal human intervention.
-          </p>
-          <p>
-            For developers, this means focusing more on architecture and creativity rather than repetitive coding tasks. Companies that have embraced these tools report up to 40% faster development cycles.
-          </p>
-          
-          <h2>2. WebAssembly Goes Mainstream</h2>
-          <p>
-            WebAssembly (Wasm) has finally reached the tipping point of mainstream adoption. With near-native performance and support for languages beyond JavaScript, complex applications that once required native apps are now running smoothly in browsers.
-          </p>
-          <p>
-            Game development, video editing, and advanced data visualization are just a few areas where WebAssembly is making significant inroads.
-          </p>
-          
-          <blockquote>
-            "WebAssembly has changed our entire approach to web applications. We're now bringing desktop-class performance to browser-based tools without compromise."
-            <cite>— Sarah Chen, CTO at WebFuture</cite>
-          </blockquote>
-          
-          <h2>3. Micro-Frontends Architecture</h2>
-          <p>
-            As applications grow in complexity, many teams are adopting micro-frontends architecture to maintain scalability and developer productivity. This approach allows different teams to work on separate parts of an application independently, using their preferred technologies.
-          </p>
-          <p>
-            The key benefits include:
-          </p>
-          <ul>
-            <li>Independent deployment of application sections</li>
-            <li>Technology flexibility for different components</li>
-            <li>Better team autonomy and specialization</li>
-            <li>Simplified maintenance of large applications</li>
-          </ul>
-          
-          <h2>4. Sustainable Web Design</h2>
-          <p>
-            With increasing awareness of the web's environmental impact, sustainable web design practices are becoming standard. This involves creating energy-efficient websites that load quickly and consume fewer resources.
-          </p>
-          <p>
-            Techniques include:
-          </p>
-          <ul>
-            <li>Optimizing images and media</li>
-            <li>Reducing JavaScript execution time</li>
-            <li>Implementing efficient caching strategies</li>
-            <li>Using green hosting providers</li>
-          </ul>
-          
-          <h2>5. Advanced CSS Features</h2>
-          <p>
-            CSS continues to evolve with powerful features that reduce the need for JavaScript. Container queries, cascade layers, and subgrid have transformed how developers approach responsive design and style management.
-          </p>
-          <p>
-            These features allow for more sophisticated layouts with less code, making websites more maintainable and performant.
-          </p>
-          
-          <h2>6. Privacy-First Development</h2>
-          <p>
-            With stricter privacy regulations and increased user awareness, privacy-first development has become essential. This means designing systems that collect minimal data, provide clear user consent mechanisms, and implement strong security measures.
-          </p>
-          <p>
-            Developers are now expected to understand privacy implications from the earliest stages of project planning.
-          </p>
-          
-          <h2>Conclusion</h2>
-          <p>
-            The future of web development is increasingly focused on performance, sustainability, and seamless user experiences. By embracing these trends, developers can create applications that not only meet current needs but are also positioned for future innovations.
-          </p>
-          <p>
-            As these technologies mature, we'll continue to see the line between web and native applications blur, opening new possibilities for what can be accomplished on the web platform.
-          </p>
-        </div>
-        
-        <!-- Author Info -->
-        <div class="mt-16 flex items-center border-t border-gray-200 dark:border-gray-700 pt-8">
-          <img 
-            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-            alt="Author" 
-            class="w-16 h-16 rounded-full object-cover mr-4"
-          />
-          <div>
-            <h3 class="text-lg font-semibold">Michael Thompson</h3>
-            <p class="text-gray-600 dark:text-gray-300">Senior Web Developer & Technology Writer</p>
-          </div>
         </div>
         
         <!-- Share Links -->

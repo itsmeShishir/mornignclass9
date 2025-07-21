@@ -83,3 +83,4 @@ def change_password(request):
         messages.success(request, "Password Updated")
         return redirect("profiles")
     return render(request, "change_password.html")
+

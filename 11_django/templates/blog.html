@@ -3,7 +3,7 @@
 
     <!-- Blog Header -->
     <section class="bg-white dark:bg-gray-900 py-16">
-      <div class="container-custom text-center">
+      <div class="container mx-auto text-center">
         <h1>Blog</h1>
         <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
           Explore our latest articles, tutorials, and insights on design, development, and technology.
@@ -15,11 +15,10 @@
     <section class="py-8 bg-gray-50 dark:bg-gray-800">
       <div class="container-custom">
         <div class="flex flex-wrap justify-center gap-4">
-          <button class="px-4 py-2 rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors">All</button>
-          <button class="px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Technology</button>
-          <button class="px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Design</button>
-          <button class="px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Development</button>
-          <button class="px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Career</button>
+            <button class="px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">All</button>
+          {% for categorys in category %}
+            <button class="px-4 py-2 rounded-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">{{ categorys.title }}</button>
+          {% endfor %}
         </div>
       </div>
     </section>
@@ -44,125 +43,26 @@
     <section class="py-16 bg-gray-50 dark:bg-gray-800">
       <div class="container-custom">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Post 1 -->
+        {% for posts in blog%}
           <article class="card animate-fade-in">
             <img 
-              src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+              src="{{ posts.img.url }}" 
               alt="People collaborating" 
               class="w-full h-48 object-cover"
             />
             <div class="p-6">
               <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">Technology</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">October 15, 2025</span>
+                <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">{{ posts.category.title }}</span>
+                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">{{ posts.created_at }}</span>
               </div>
-              <h3 class="text-xl mb-3">The Future of Web Development: Trends to Watch in 2025</h3>
+              <h3 class="text-xl mb-3">{{ posts.title }}</h3>
               <p class="text-gray-600 dark:text-gray-300 mb-4">
-                As we move further into 2025, web development continues to evolve at a rapid pace. From AI-powered tools to new approaches in design...
+                {{ posts.small_content }}
               </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
+              <a href="{% url 'singleblogpage' posts.id %}" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
             </div>
           </article>
-          
-          <!-- Post 2 -->
-          <article class="card animate-fade-in" style="animation-delay: 100ms;">
-            <img 
-              src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Laptop with code" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-accent-100 text-accent-800 dark:bg-accent-900 dark:text-accent-200 px-3 py-1 rounded-full">Development</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">October 10, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">Getting Started with Tailwind CSS: A Beginner's Guide</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Learn how to set up Tailwind CSS and leverage its utility-first approach to build modern interfaces quickly.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
-          
-          <!-- Post 3 -->
-          <article class="card animate-fade-in" style="animation-delay: 200ms;">
-            <img 
-              src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Person using laptop" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-3 py-1 rounded-full">Design</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">October 5, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">Designing for Accessibility: Best Practices</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Explore how to make your websites more accessible to all users, including those with disabilities.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
-          
-          <!-- Post 4 -->
-          <article class="card animate-fade-in" style="animation-delay: 300ms;">
-            <img 
-              src="https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Team meeting" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 px-3 py-1 rounded-full">Career</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">September 28, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">From Junior to Senior: Navigating Your Web Dev Career</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Advice for developers looking to advance their careers and take on more senior responsibilities.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
-          
-          <!-- Post 5 -->
-          <article class="card animate-fade-in" style="animation-delay: 400ms;">
-            <img 
-              src="https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="User experience design" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 px-3 py-1 rounded-full">UX</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">September 22, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">UX Writing: Creating Clear and Effective Microcopy</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                The art of writing small but mighty text that guides users through your digital products.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
-          
-          <!-- Post 6 -->
-          <article class="card animate-fade-in" style="animation-delay: 500ms;">
-            <img 
-              src="https://images.pexels.com/photos/2004161/pexels-photo-2004161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Smartphone apps" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 px-3 py-1 rounded-full">Mobile</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">September 15, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">Progressive Web Apps vs. Native: Which to Choose in 2025?</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                A comparison of PWAs and native apps to help you make the right choice for your next project.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
+        {% endfor %}
         </div>
         
         <!-- Pagination -->

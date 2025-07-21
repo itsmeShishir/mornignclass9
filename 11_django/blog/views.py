@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from customauthapp.models import Contact
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import *
 
 # Create your views here.
 # inner working of template , views and urls 
@@ -10,6 +14,11 @@ from django.http import HttpResponse
 #  def functionName(request):
 #      return HttpResponse("<h1>hello this is home page</h1>")
 
+
+# ORM -> data Show in UI
+# 1. contact.save()
+# 2. Contact.objects.create()
+# 3. Blog.objects.all() -> select * from blog
 def index(request):
     # return HttpResponse("<h1>hello this is home page</h1>")
     return render(request, "index.html")
@@ -18,15 +27,39 @@ def About(request):
     # return HttpResponse("<h1>hello this is About page</h1>")
     return render(request, "about.html")
 
-def Category(request):
+def Categorys(request):
     # return HttpResponse("<h1>hello this is Category page</h1>")
     return render(request, "category.html")
 
 def SingleCategory(request):
     return render(request, "singlecategory.html")
-def Blog(request):
-    return render(request, "blog.html")
-def SingleBlog(request):
-    return render(request, "post.html")
-def Contact(request):
+
+def Blogs(request):
+    blog = Blog.objects.all()
+    category = Category.objects.all()
+    context = {
+        'blog': blog,
+        'category': category
+    }
+    print(context)
+    return render(request, "blog.html", context)
+
+def SingleBlog(request, id):
+    getSingle= get_object_or_404(Blog, id=id)
+    context = {
+        "getSingle": getSingle
+    }
+    return render(request, "post.html", context)
+
+def Contacts(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email= request.POST.get("email")
+        subject = request.POST.get("subject")
+        message = request.POST.get("message")
+        # contact = Contact(name=name, email=email, subject=subject, message=message)
+        # contact.save()
+        Contact.objects.create(name=name, email=email, subject=subject, message=message)
+        messages.success(request, "Message Sent")
+        return redirect("contact")
     return render(request, "contact.html")
