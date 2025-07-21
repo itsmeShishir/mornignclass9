@@ -7,56 +7,24 @@
       <div class="container-custom">
         <div class="swiper h-[500px] rounded-xl overflow-hidden">
           <div class="swiper-wrapper">
-            <!-- Slide 1 -->
+            {% for slider in blogs %}
             <div class="swiper-slide relative">
               <img 
-                src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg" 
+                src="{{ slider.img.url }}" 
                 alt="Technology" 
                 class="w-full h-full object-cover"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
                 <div class="p-8 text-white">
-                  <span class="bg-primary-500 text-white px-3 py-1 rounded-full text-sm">Technology</span>
-                  <h2 class="text-3xl md:text-4xl mt-4 mb-2">The Future of Web Development</h2>
-                  <p class="text-gray-200 mb-4">Explore the latest trends shaping the future of web development</p>
-                  <a href="/post.html" class="btn-primary">Read More</a>
+                  <span class="bg-primary-500 text-white px-3 py-1 rounded-full text-sm">{{ slider.category.title }}</span>
+                  <h2 class="text-3xl md:text-4xl mt-4 mb-2">{{ slider.title }}</h2>
+                  <p class="text-gray-200 mb-4">{{ slider.small_content }}</p>
+                  <a href="{% url 'singleblogpage' slider.id %}" class="btn-primary">Read More</a>
                 </div>
               </div>
             </div>
+            {% endfor %}
             
-            <!-- Slide 2 -->
-            <div class="swiper-slide relative">
-              <img 
-                src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg" 
-                alt="Design" 
-                class="w-full h-full object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
-                <div class="p-8 text-white">
-                  <span class="bg-accent-500 text-white px-3 py-1 rounded-full text-sm">Design</span>
-                  <h2 class="text-3xl md:text-4xl mt-4 mb-2">Mastering UI/UX Design</h2>
-                  <p class="text-gray-200 mb-4">Learn the principles of creating engaging user experiences</p>
-                  <a href="/post.html" class="btn-primary">Read More</a>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="swiper-slide relative">
-              <img 
-                src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" 
-                alt="Career" 
-                class="w-full h-full object-cover"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
-                <div class="p-8 text-white">
-                  <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm">Career</span>
-                  <h2 class="text-3xl md:text-4xl mt-4 mb-2">Building Your Tech Career</h2>
-                  <p class="text-gray-200 mb-4">Tips and strategies for advancing in the tech industry</p>
-                  <a href="/post.html" class="btn-primary">Read More</a>
-                </div>
-              </div>
-            </div>
           </div>
           
           <div class="swiper-pagination"></div>
@@ -72,73 +40,24 @@
         <h2 class="text-center mb-12">Explore Categories</h2>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Technology Category -->
+          {% for categories in category %}
           <a href="/blog.html" class="group">
             <div class="relative h-64 rounded-xl overflow-hidden">
               <img 
-                src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg" 
+                src="{{ categories.img.url }}" 
                 alt="Technology" 
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                class="w-full h-full object-fill group-hover:scale-110 transition-transform duration-300"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
                 <div class="p-6 text-white">
-                  <h3 class="text-xl font-bold mb-2">Technology</h3>
-                  <p class="text-gray-200">Latest tech trends and innovations</p>
+                  <h3 class="text-xl font-bold mb-2">{{ categories.title }}</h3>
                 </div>
               </div>
             </div>
           </a>
+          {% endfor %}
           
-          <!-- Design Category -->
-          <a href="/blog.html" class="group">
-            <div class="relative h-64 rounded-xl overflow-hidden">
-              <img 
-                src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg" 
-                alt="Design" 
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
-                <div class="p-6 text-white">
-                  <h3 class="text-xl font-bold mb-2">Design</h3>
-                  <p class="text-gray-200">UI/UX and visual design insights</p>
-                </div>
-              </div>
-            </div>
-          </a>
-          
-          <!-- Development Category -->
-          <a href="/blog.html" class="group">
-            <div class="relative h-64 rounded-xl overflow-hidden">
-              <img 
-                src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg" 
-                alt="Development" 
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
-                <div class="p-6 text-white">
-                  <h3 class="text-xl font-bold mb-2">Development</h3>
-                  <p class="text-gray-200">Coding tutorials and best practices</p>
-                </div>
-              </div>
-            </div>
-          </a>
-          
-          <!-- Career Category -->
-          <a href="/blog.html" class="group">
-            <div class="relative h-64 rounded-xl overflow-hidden">
-              <img 
-                src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" 
-                alt="Career" 
-                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent flex items-end">
-                <div class="p-6 text-white">
-                  <h3 class="text-xl font-bold mb-2">Career</h3>
-                  <p class="text-gray-200">Professional growth and opportunities</p>
-                </div>
-              </div>
-            </div>
-          </a>
+         
         </div>
       </div>
     </section>

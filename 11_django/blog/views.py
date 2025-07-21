@@ -20,8 +20,15 @@ from .models import *
 # 2. Contact.objects.create()
 # 3. Blog.objects.all() -> select * from blog
 def index(request):
-    # return HttpResponse("<h1>hello this is home page</h1>")
-    return render(request, "index.html")
+    blogs= Blog.objects.filter(home_page_show=True)
+    category = Category.objects.all()
+    feature_blog = Blog.objects.filter(featured_blog=True)
+    context = {
+        "blogs": blogs,
+        "category": category,
+        "feature_blog": feature_blog
+    }
+    return render(request, "index.html", context)
 
 def About(request):
     # return HttpResponse("<h1>hello this is About page</h1>")
