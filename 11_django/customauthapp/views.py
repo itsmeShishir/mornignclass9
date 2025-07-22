@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import CustomUser
+from .models import CustomUser, Contact
 from django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
+from blog.models import Blog, Comment, Category
+
 # 2 types -> Custom User Form , Forms.py ->> bootstrap forms
 # @login_required
 from django.contrib.auth.decorators import login_required
@@ -12,6 +14,8 @@ def logins(request):
         user= authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
+            if user.is_superuser:
+                return redirect("admin_page")
             messages.success(request, "Login Success")
             return redirect("profiles")
         else:
@@ -84,3 +88,21 @@ def change_password(request):
         return redirect("profiles")
     return render(request, "change_password.html")
 
+# Admin panel
+def admins_page(request):
+    # count 
+    users = CustomUser.objects.all()
+    usercount = users.count()
+    blog = Blog.objects.all()
+    comment = Comment.objects.all()
+    category = Category.objects.all()
+    contact = Contact.objects.all()
+    context = {
+        "users": users,
+        "usercount": usercount,
+        "blog": blog,
+        "comment": comment,
+        "category": category,
+        "contact": contact
+    }
+    return render(request, "admin.html", context)

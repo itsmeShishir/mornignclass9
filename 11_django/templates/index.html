@@ -38,7 +38,6 @@
     <section class="py-16 bg-white dark:bg-gray-900">
       <div class="container-custom">
         <h2 class="text-center mb-12">Explore Categories</h2>
-        
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {% for categories in category %}
           <a href="/blog.html" class="group">
@@ -65,29 +64,31 @@
     <!-- Rest of the content remains the same -->
     <!-- Featured Post -->
     <section class="py-16 bg-gray-50 dark:bg-gray-800">
-      <div class="container-custom">
+      <div class="container mx-auto">
         <h2 class="text-center mb-12">Featured Post</h2>
+        {% for post in feature_blog  %}
         
         <div class="card lg:flex animate-fade-in">
           <div class="lg:w-1/2">
             <img 
-              src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+              src="{{ post.img.url }}" 
               alt="People collaborating" 
               class="w-full h-full object-cover object-center"
             />
           </div>
           <div class="lg:w-1/2 p-6 md:p-8 flex flex-col justify-center">
             <div class="flex items-center mb-4">
-              <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">Technology</span>
-              <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">October 15, 2025</span>
+              <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">{{ post.category.title }}</span>
+              <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">{{ post.created_at }}</span>
             </div>
-            <h3 class="text-2xl md:text-3xl mb-4">The Future of Web Development: Trends to Watch in 2025</h3>
+            <h3 class="text-2xl md:text-3xl mb-4">{{ post.title }}</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              As we move further into 2025, web development continues to evolve at a rapid pace. From AI-powered tools to new approaches in design, let's explore what's shaping the future of the web.
+              {{ post.small_content }}
             </p>
-            <a href="/post.html" class="btn-primary self-start">Read More</a>
+            <a href="{% url 'singleblogpage' post.id %}" class="btn-primary self-start">Read More</a>
           </div>
         </div>
+        {% endfor %}
       </div>
     </section>
 
@@ -96,69 +97,33 @@
       <div class="container-custom">
         <div class="flex justify-between items-center mb-12">
           <h2>Recent Posts</h2>
-          <a href="/blog.html" class="btn-secondary">View All</a>
+          <a href="{% url 'blogpage' %}" class="btn-secondary">View All</a>
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- Post 1 -->
-          <article class="card animate-fade-in">
+          {% for posts in post %}
+            <article class="card animate-fade-in">
             <img 
-              src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+              src="{{ posts.img.url }}" 
               alt="Laptop with code" 
               class="w-full h-48 object-cover"
             />
             <div class="p-6">
               <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-accent-100 text-accent-800 dark:bg-accent-900 dark:text-accent-200 px-3 py-1 rounded-full">Development</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">October 10, 2025</span>
+                <span class="text-sm font-medium bg-accent-100 text-accent-800 dark:bg-accent-900 dark:text-accent-200 px-3 py-1 rounded-full">{{posts.category.title}}</span>
+                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">{{ posts.created_at }}</span>
               </div>
-              <h3 class="text-xl mb-3">Getting Started with Tailwind CSS: A Beginner's Guide</h3>
+              <h3 class="text-xl mb-3">{{ posts.title }}</h3>
               <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Learn how to set up Tailwind CSS and leverage its utility-first approach to build modern interfaces quickly.
+                {{ posts.small_content }}
               </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
+              <a href="{% url 'singleblogpage' posts.id %}" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
             </div>
           </article>
+          {% endfor %}
           
-          <!-- Post 2 -->
-          <article class="card animate-fade-in" style="animation-delay: 100ms;">
-            <img 
-              src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Person using laptop" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-3 py-1 rounded-full">Design</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">October 5, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">Designing for Accessibility: Best Practices</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Explore how to make your websites more accessible to all users, including those with disabilities.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
           
-          <!-- Post 3 -->
-          <article class="card animate-fade-in" style="animation-delay: 200ms;">
-            <img 
-              src="https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-              alt="Team meeting" 
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center mb-4">
-                <span class="text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 px-3 py-1 rounded-full">Career</span>
-                <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">September 28, 2025</span>
-              </div>
-              <h3 class="text-xl mb-3">From Junior to Senior: Navigating Your Web Dev Career</h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Advice for developers looking to advance their careers and take on more senior responsibilities.
-              </p>
-              <a href="/post.html" class="text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300">Read More →</a>
-            </div>
-          </article>
         </div>
       </div>
     </section>

@@ -14,19 +14,23 @@ from .models import *
 #  def functionName(request):
 #      return HttpResponse("<h1>hello this is home page</h1>")
 
-
+# 15 to 20 min 
 # ORM -> data Show in UI
 # 1. contact.save()
 # 2. Contact.objects.create()
 # 3. Blog.objects.all() -> select * from blog
+# 4. Blog.objects.get(id=1) -> select * from blog where id = 1
+# 5. Blog.objects.filter(featured_blog=True)
 def index(request):
     blogs= Blog.objects.filter(home_page_show=True)
     category = Category.objects.all()
     feature_blog = Blog.objects.filter(featured_blog=True)
+    post = Blog.objects.all()
     context = {
         "blogs": blogs,
         "category": category,
-        "feature_blog": feature_blog
+        "feature_blog": feature_blog,
+        "post": post
     }
     return render(request, "index.html", context)
 
@@ -38,8 +42,13 @@ def Categorys(request):
     # return HttpResponse("<h1>hello this is Category page</h1>")
     return render(request, "category.html")
 
-def SingleCategory(request):
-    return render(request, "singlecategory.html")
+def SingleCategory(request, id):
+    category = get_object_or_404(Category, id=id)
+    blog = Blog.objects.filter(category=category)
+    context = {
+        "blog": blog
+    }
+    return render(request, "singlecategory.html", context)
 
 def Blogs(request):
     blog = Blog.objects.all()
@@ -48,7 +57,6 @@ def Blogs(request):
         'blog': blog,
         'category': category
     }
-    print(context)
     return render(request, "blog.html", context)
 
 def SingleBlog(request, id):
@@ -68,5 +76,5 @@ def Contacts(request):
         # contact.save()
         Contact.objects.create(name=name, email=email, subject=subject, message=message)
         messages.success(request, "Message Sent")
-        return redirect("contact")
+        return redirect("contactpage")
     return render(request, "contact.html")

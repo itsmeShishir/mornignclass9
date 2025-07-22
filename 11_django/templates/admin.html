@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div>
+        <h1>Total USer Count : {{ usercount }}</h1>
+        <h1>Admin panel</h1>
+        <div>
+            <a href="{% url 'admin:login' %}">Login</a>
+            <a href="{% url 'admin:logout' %}">Logout</a>
+        </div>
+        <div class="bg-red-300">
+            <h1>Blog List</h1>
+            <ul>
+                {% for blog in blog %}
+                    <li>
+                        <a href="{% url 'singleblogpage' blog.id %}">{{ blog.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="bg-green-300">
+            <h1>Category List</h1>
+            <ul>
+                {% for blog in category %}
+                    <li>
+                        <a href="{% url 'singleblogpage' blog.id %}">{{ blog.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="bg-green-300">
+            <h1>Comment List</h1>
+            <ul>
+                {% for blog in comment %}
+                    <li>
+                        <a href="{% url 'singleblogpage' blog.id %}">{{ blog.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="bg-green-300">
+            <h1>user List</h1>
+            <ul>
+                {% for blog in users %}
+                    <li>
+                        <a href="">{{ blog.email }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock  %}

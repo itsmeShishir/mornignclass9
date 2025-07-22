@@ -8,4 +8,5 @@ urlpatterns = [
     path("profiles", profiles, name="profiles"),
     path("update_profile", update_profile, name="update_profile"),
     path("update_password", change_password, name="update_password"),
+    path("admin_page", admins_page, name="admin_page"),
 ]
