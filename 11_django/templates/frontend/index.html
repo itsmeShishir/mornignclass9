@@ -66,29 +66,27 @@
     <section class="py-16 bg-gray-50 dark:bg-gray-800">
       <div class="container mx-auto">
         <h2 class="text-center mb-12">Featured Post</h2>
-        {% for post in feature_blog  %}
         
         <div class="card lg:flex animate-fade-in">
           <div class="lg:w-1/2">
             <img 
-              src="{{ post.img.url }}" 
+              src="{{ feature_blogs.img.url }}" 
               alt="People collaborating" 
               class="w-full h-full object-cover object-center"
             />
           </div>
           <div class="lg:w-1/2 p-6 md:p-8 flex flex-col justify-center">
             <div class="flex items-center mb-4">
-              <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">{{ post.category.title }}</span>
-              <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">{{ post.created_at }}</span>
+              <span class="text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-200 px-3 py-1 rounded-full">{{ feature_blogs.category.title }}</span>
+              <span class="ml-4 text-sm text-gray-500 dark:text-gray-400">{{ feature_blogs.created_at }}</span>
             </div>
-            <h3 class="text-2xl md:text-3xl mb-4">{{ post.title }}</h3>
+            <h3 class="text-2xl md:text-3xl mb-4">{{ feature_blogs.title }}</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
-              {{ post.small_content }}
+              {{ feature_blogs.small_content }}
             </p>
-            <a href="{% url 'singleblogpage' post.id %}" class="btn-primary self-start">Read More</a>
+            <a href="{% url 'singleblogpage' feature_blogs.id %}" class="btn-primary self-start">Read More</a>
           </div>
         </div>
-        {% endfor %}
       </div>
     </section>
 

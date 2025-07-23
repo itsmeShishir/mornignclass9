@@ -3,16 +3,22 @@
     <div>
         <h1>Total USer Count : {{ usercount }}</h1>
         <h1>Admin panel</h1>
+        {{ message }}
         <div>
             <a href="{% url 'admin:login' %}">Login</a>
             <a href="{% url 'admin:logout' %}">Logout</a>
         </div>
         <div class="bg-red-300">
             <h1>Blog List</h1>
+            <a href="{% url 'add_blog' %}">Add blog</a>
             <ul>
                 {% for blog in blog %}
                     <li>
-                        <a href="{% url 'singleblogpage' blog.id %}">{{ blog.title }}</a>
+                        <a href="{% url 'update_blog' blog.id %}">{{ blog.title }}</a>
+                        <form action="{% url 'delete_blog' blog.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>

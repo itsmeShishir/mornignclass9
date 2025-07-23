@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import CustomUser, Contact
 from django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
-from blog.models import Blog, Comment, Category
+from blog.models import Blog, Comment, Category, Tag
 
 # 2 types -> Custom User Form , Forms.py ->> bootstrap forms
 # @login_required
@@ -12,12 +12,14 @@ def logins(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
         user= authenticate(request, email=email, password=password)
-        if user is not None:
+        if user:
             login(request, user)
-            if user.is_superuser:
+            if user.role == "admin":
+                messages.success(request, "Login Success")
                 return redirect("admin_page")
-            messages.success(request, "Login Success")
-            return redirect("profiles")
+            elif user.role == "user":
+                messages.success(request, "Login Success")
+                return redirect("profiles")
         else:
             messages.error(request, "Invalid Credentials")
             return redirect("login")
@@ -50,6 +52,10 @@ def logouts(request):
 
 @login_required
 def profiles(request):
+    if request.user.role != "user":
+        messages.error(request, "Access Denied")
+        return redirect("admin_page")
+    
     users = request.user
     context = {
         "users": users
@@ -88,9 +94,11 @@ def change_password(request):
         return redirect("profiles")
     return render(request, "change_password.html")
 
-# Admin panel
+@login_required
 def admins_page(request):
-    # count 
+    if request.user.role != "admin":
+        messages.error(request, "Access Denied")
+        return redirect("profiles")
     users = CustomUser.objects.all()
     usercount = users.count()
     blog = Blog.objects.all()
@@ -105,4 +113,81 @@ def admins_page(request):
         "category": category,
         "contact": contact
     }
-    return render(request, "admin.html", context)
+    return render(request, "admins/admin.html", context)
+
+@login_required
+def add_new_blog(request):
+    if request.user.role != "admin":
+        messages.error(request, "Access Denied")
+        return redirect("profiles")
+    categories = Category.objects.all()
+    tag = Tag.objects.all()
+    context = {
+        "categories": categories,
+        "tag": tag
+    }
+    if request.method == "POST":
+        title = request.POST.get("title")
+        small_content = request.POST.get("small_content")
+        content = request.POST.get("content")
+        slug = request.POST.get("slug")
+        home_page_show = request.POST.get("home_page_show") == "on"
+        featured_blog = request.POST.get("featured_blog") == "on"
+        img = request.FILES.get("img")
+        category = Category.objects.get(id = request.POST.get("category"))
+        tag_id = request.POST.getlist("tag")
+        blog = Blog.objects.create(
+            title=title, 
+            small_content=small_content, 
+            content=content, 
+            slug=slug, 
+            home_page_show=home_page_show, 
+            featured_blog=featured_blog, 
+            img=img, 
+            category=category
+        )
+        blog.tag.set(tag_id)
+        messages.success(request, "Blog Added")
+        return redirect("admin_page")
+    return render(request, "admins/add_new_blog.html", context)
+
+@login_required
+def update_blog(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    if request.user.role != "admin":
+        messages.error(request, "Access Denied")
+        return redirect("profiles")
+    categories = Category.objects.all()
+    tag = Tag.objects.all()
+    context = {
+        "categories": categories,
+        "tag": tag,
+        "blog": blog
+    }
+    if request.method == "POST":
+        blog.title = request.POST.get("title")
+        blog.small_content = request.POST.get("small_content")
+        blog.content = request.POST.get("content")
+        blog.slug = request.POST.get("slug")
+        blog.home_page_show = request.POST.get("home_page_show") == "on"
+        blog.featured_blog = request.POST.get("featured_blog") == "on"
+        if request.FILES.get("img"):
+            blog.img = request.FILES.get("img")
+        blog.category = Category.objects.get(id = request.POST.get("category"))
+        tag_id = request.POST.getlist("tag")
+        blog.save()
+        blog.tag.set(tag_id)
+        messages.success(request, "Blog Added")
+        return redirect("admin_page")
+    return render(request, "admins/add_new_blog.html", context)
+
+
+@login_required
+def delete_blog(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    if request.user.role != "admin":
+        messages.error(request, "Access Denied")
+        return redirect("profiles")
+    blog.delete()
+    messages.success(request, "Blog Deleted")
+    return redirect("admin_page")
