@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customauthapp',
-    'blog'
+    'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 AUTH_USER_MODEL = 'customauthapp.CustomUser'
@@ -131,6 +133,20 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"
+# Ck editor config
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# Ck editor config
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+        'toolbarCanCollapse': True,
+        'toolbarStartupExpanded': True
+    }
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

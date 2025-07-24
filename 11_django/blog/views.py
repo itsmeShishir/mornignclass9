@@ -4,6 +4,7 @@ from customauthapp.models import Contact
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 # inner working of template , views and urls 
@@ -51,9 +52,12 @@ def SingleCategory(request, id):
 
 def Blogs(request):
     blog = Blog.objects.all()
+    paginator = Paginator(blog, 12)
+    pagination_number = request.GET.get("page")
+    page_obj = paginator.get_page(pagination_number)
     category = Category.objects.all()
     context = {
-        'blog': blog,
+        'page_obj': page_obj,
         'category': category
     }
     return render(request, "frontend/blog.html", context)

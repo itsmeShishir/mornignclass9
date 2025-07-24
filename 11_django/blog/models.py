@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.text import slugify
 # oop -> Class or Interface -> Model -> Sql -> ORM -> Database 
 # ORM -> Object Relational Mapping
+# ck editor editor
+from ckeditor.fields import RichTextField
 
 # pip install Pillow
 class Category(models.Model):
@@ -29,12 +31,12 @@ class Tag(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=255)
-    small_content = models.CharField(max_length=255)
+    small_content = RichTextField()
     slug = models.SlugField(max_length=255, unique=True, null=True, blank=True)
     home_page_show = models.BooleanField(default=False)
     featured_blog = models.BooleanField(default=False)
     img = models.ImageField(upload_to="blog/", null=True, blank=True)
-    content = models.TextField()
+    content = RichTextField()
     tag = models.ManyToManyField(Tag)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

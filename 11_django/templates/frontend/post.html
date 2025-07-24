@@ -24,7 +24,8 @@
       <div class="container max-w-4xl mx-auto max-w-3xl">
         <div class="prose prose-lg dark:prose-invert mx-auto">
           <p class="lead text-xl text-gray-600 dark:text-gray-300">
-           {{getSingle.content}}
+           <!-- {{getSingle.content | striptags}} -->
+            {{getSingle.content | safe}}
           </p>
         </div>
         

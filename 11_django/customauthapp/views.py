@@ -3,9 +3,14 @@ from .models import CustomUser, Contact
 from django.contrib.auth import authenticate, login , logout
 from django.contrib import messages
 from blog.models import Blog, Comment, Category, Tag
+from .forms import TagForm, CategoryForm
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+#  reverse_lazy 
+from django.urls import reverse_lazy
 
 # 2 types -> Custom User Form , Forms.py ->> bootstrap forms
 # @login_required
+
 from django.contrib.auth.decorators import login_required
 def logins(request):
     if request.method == "POST":   
@@ -191,3 +196,42 @@ def delete_blog(request, id):
     blog.delete()
     messages.success(request, "Blog Deleted")
     return redirect("admin_page")
+
+@login_required
+def tag_admin_page(request):
+    if request.user.role != "admin":
+        messages.error(request, "Access Denied")
+        return redirect("profiles")
+
+    if request.method == "POST":
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Tag Added")
+            return redirect("admin_page")
+    else:
+        form = TagForm()
+    return render(request, "admins/tag.html", {"form": form})
+# Category -> Crud using CBV
+#list, create, update, delete, details
+class CategoryList(ListView):
+    model = Category
+    template_name = "admins/category.html"
+    context_object_name = "categories"
+
+class CategoryCreate(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = "admins/createcategory.html"
+    success_url = reverse_lazy("admin_page")
+
+class CategoryUpdate(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = "admins/updatecategory.html"
+    success_url = reverse_lazy("admin_page")
+
+class CategoryDelete(DeleteView):
+    model = Category
+    template_name = "admins/deletecategory.html"
+    success_url = reverse_lazy("admin_page")

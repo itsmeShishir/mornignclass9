@@ -4,6 +4,7 @@
         <h1>Total USer Count : {{ usercount }}</h1>
         <h1>Admin panel</h1>
         {{ message }}
+        <h1><a href="{% url 'tag_admin' %}">Add Tag</a></h1>
         <div>
             <a href="{% url 'admin:login' %}">Login</a>
             <a href="{% url 'admin:logout' %}">Logout</a>

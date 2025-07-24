@@ -12,4 +12,10 @@ urlpatterns = [
     path("add_blog", add_new_blog, name="add_blog"),
     path("update_blog/<int:id>", update_blog, name="update_blog"),
     path("delete_blog/<int:id>", delete_blog, name="delete_blog"),
+    path("add_tag", tag_admin_page, name="tag_admin"),
+    path("get_category", CategoryList.as_view(), name="category_get"),
+    path("add_category", CategoryCreate.as_view(), name="category_create"),
+    path("update_category", CategoryUpdate.as_view(), name="category_update"),
+    path("delete_category", CategoryDelete.as_view(), name="category_delete"),
+
 ]

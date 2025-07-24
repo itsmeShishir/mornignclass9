@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div class="flex h-full items-center justify-center">
+        <h1>Tag</h1>
+        <form action="{% url 'tag_admin' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}
